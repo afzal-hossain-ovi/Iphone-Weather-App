@@ -10,12 +10,11 @@ import UIKit
 
 
 
-class ViewController: UIViewController {
+class MainVC: UIViewController {
+    
     @IBOutlet var label: UILabel!
     @IBOutlet var button: UIButton!
     @IBOutlet var cityTextField: UITextField!
-    
-        
 
     @IBAction func weatherCast(_ sender: Any) {
         if cityTextField.text != ""{
@@ -45,6 +44,7 @@ class ViewController: UIViewController {
                 secondController.name = cityTextField.text!
             
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,29 +7,49 @@
 //
 
 import UIKit
+import MapKit
 
-class MapViewController: UIViewController {
+
+class MapViewController: UIViewController,MKMapViewDelegate {
+    
+    var latitude = 0.0
+    var longitude = 0.0
+    var cityName = ""
+    
+    @IBOutlet var map: MKMapView!
+    
+    @IBAction func backButton(_ sender: Any) {
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let coordinateLocation = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        let region = MKCoordinateRegion(center: coordinateLocation, span: span)
+        map.setRegion(region, animated: true)
+        let annonation = MKPointAnnotation()
+        annonation.title = cityName
+        annonation.coordinate = coordinateLocation
+        map.addAnnotation(annonation)
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSecondController"{
+            let secondController = segue.destination as! SecondViewController
+            secondController.name = cityName
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+   
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
